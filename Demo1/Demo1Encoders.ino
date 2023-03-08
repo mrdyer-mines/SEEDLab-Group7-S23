@@ -35,7 +35,7 @@ void loop() {
   if (newLeft != positionLeft || newRight != positionRight) {
     // converting counts to position, multiply counts*(pi/2)/(counts in pi/2 revs)
     positionL = (newLeft*(Pi/2.0))/800.0;
-    positionR = (newRight*(Pi/2.0))/800.0;
+    positionR = (-1*newRight*(Pi/2.0))/800.0;
     Serial.print("Left: ");
     Serial.print(positionL);
         
