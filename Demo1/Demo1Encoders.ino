@@ -7,9 +7,14 @@
 DualMC33926MotorShield md;
 Encoder knobLeft(3,5);
 Encoder knobRight(2,6);
-float positionL = 0.0;
-float positionR = 0.0;
+float angleL = 0.0;
+float angleR = 0.0;
+float phi = 0.0;
 int motorSpeed = 0;
+float r = 3/12;
+float d = (10+(1/8))/12;
+long positionLeft  = -999;
+long positionRight = -999;
 
 void setup() {
   Serial.begin(9600);
@@ -18,8 +23,6 @@ void setup() {
 
 }
 
-long positionLeft  = -999;
-long positionRight = -999;
 
 
 void loop() {
@@ -34,14 +37,20 @@ void loop() {
   newRight = knobRight.read();
   if (newLeft != positionLeft || newRight != positionRight) {
     // converting counts to position, multiply counts*(pi/2)/(counts in pi/2 revs)
-    positionL = (newLeft*(Pi/2.0))/800.0;
-    positionR = (-1*newRight*(Pi/2.0))/800.0;
+    angleL = (newLeft*(Pi/2.0))/800.0;
+    angleR = (-1*newRight*(Pi/2.0))/800.0;
+
+    phi = (r/d)*(angleL-angleR);
     Serial.print("Left: ");
-    Serial.print(positionL);
+    Serial.print(angleL);
         
     Serial.print(", Right: ");
-    Serial.println(positionR);
+    Serial.println(angleR);
+
+    Serial.print(phi);
     Serial.println();
+
+
     positionLeft = newLeft;
     positionRight = newRight;
   }
