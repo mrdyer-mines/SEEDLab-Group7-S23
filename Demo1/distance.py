@@ -75,7 +75,7 @@ while True:
         markerSize = 0.05375
         # Distance calculation uses marker size, length, and focal length
         distance = markerSize*focalLength/markerLength
-        # Output the distance converted from centimeters to meters
+        # Output the distance in centimeters, converted from meters
         print(distance*100)
         
     
